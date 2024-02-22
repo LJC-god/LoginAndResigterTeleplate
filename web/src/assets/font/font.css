@@ -1,0 +1,9 @@
+/* 引入阿里的字体包 */
+@font-face {
+    font-family: Alimama_DongFangDaKai_Regular;
+    src: url(./Alimama_DongFangDaKai_Regular.ttf);
+    font-weight: normal;
+    font-style: normal;
+    /* 为字体提供一个短暂的阻塞周期和无限的交换周期。 */
+    font-display: auto;
+}

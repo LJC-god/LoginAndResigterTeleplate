@@ -1,0 +1,11 @@
+import { createApp } from "vue";
+import App from "./App.vue";
+import "normalize.css";
+import router from "./router/index.js";
+import "../src/assets/css/index.css";
+import pinia from "../src/stores/index.js";
+import "../src/assets/font/font.css";
+const app = createApp(App);
+app.use(router);
+app.use(pinia);
+app.mount("#app");
