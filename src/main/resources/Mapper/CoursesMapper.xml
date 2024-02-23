@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.knowledgeSystem.Mapper.CoursesMapper">
+  <resultMap id="BaseResultMap" type="com.example.knowledgeSystem.Domain.Courses">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="PrimaryCourse" jdbcType="VARCHAR" property="primarycourse" />
+    <result column="ParentCourse" jdbcType="VARCHAR" property="parentcourse" />
+    <result column="SubCourse" jdbcType="VARCHAR" property="subcourse" />
+    <result column="NumberOfCourses" jdbcType="INTEGER" property="numberofcourses" />
+    <result column="NumberOfLearners" jdbcType="INTEGER" property="numberoflearners" />
+    <result column="NumberOfFavorites" jdbcType="INTEGER" property="numberoffavorites" />
+    <result column="ImageUrl" jdbcType="VARCHAR" property="imageurl" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.knowledgeSystem.Domain.Courses">
+    <result column="CourseDescription" jdbcType="LONGVARCHAR" property="coursedescription" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, PrimaryCourse, ParentCourse, SubCourse, NumberOfCourses, NumberOfLearners, NumberOfFavorites, 
+    ImageUrl
+  </sql>
+  <sql id="Blob_Column_List">
+    CourseDescription
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.example.knowledgeSystem.Domain.CoursesExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from courses
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.example.knowledgeSystem.Domain.CoursesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from courses
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from courses
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from courses
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.knowledgeSystem.Domain.CoursesExample">
+    delete from courses
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.knowledgeSystem.Domain.Courses">
+    insert into courses (id, PrimaryCourse, ParentCourse, 
+      SubCourse, NumberOfCourses, NumberOfLearners, 
+      NumberOfFavorites, ImageUrl, CourseDescription
+      )
+    values (#{id,jdbcType=INTEGER}, #{primarycourse,jdbcType=VARCHAR}, #{parentcourse,jdbcType=VARCHAR}, 
+      #{subcourse,jdbcType=VARCHAR}, #{numberofcourses,jdbcType=INTEGER}, #{numberoflearners,jdbcType=INTEGER}, 
+      #{numberoffavorites,jdbcType=INTEGER}, #{imageurl,jdbcType=VARCHAR}, #{coursedescription,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.knowledgeSystem.Domain.Courses">
+    insert into courses
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="primarycourse != null">
+        PrimaryCourse,
+      </if>
+      <if test="parentcourse != null">
+        ParentCourse,
+      </if>
+      <if test="subcourse != null">
+        SubCourse,
+      </if>
+      <if test="numberofcourses != null">
+        NumberOfCourses,
+      </if>
+      <if test="numberoflearners != null">
+        NumberOfLearners,
+      </if>
+      <if test="numberoffavorites != null">
+        NumberOfFavorites,
+      </if>
+      <if test="imageurl != null">
+        ImageUrl,
+      </if>
+      <if test="coursedescription != null">
+        CourseDescription,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="primarycourse != null">
+        #{primarycourse,jdbcType=VARCHAR},
+      </if>
+      <if test="parentcourse != null">
+        #{parentcourse,jdbcType=VARCHAR},
+      </if>
+      <if test="subcourse != null">
+        #{subcourse,jdbcType=VARCHAR},
+      </if>
+      <if test="numberofcourses != null">
+        #{numberofcourses,jdbcType=INTEGER},
+      </if>
+      <if test="numberoflearners != null">
+        #{numberoflearners,jdbcType=INTEGER},
+      </if>
+      <if test="numberoffavorites != null">
+        #{numberoffavorites,jdbcType=INTEGER},
+      </if>
+      <if test="imageurl != null">
+        #{imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="coursedescription != null">
+        #{coursedescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.knowledgeSystem.Domain.CoursesExample" resultType="java.lang.Long">
+    select count(*) from courses
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="getCourseList" resultType="com.example.knowledgeSystem.Domain.Courses">
+    select *
+    from courses
+  </select>
+  <select id="getFrontEndCourseList" resultType="com.example.knowledgeSystem.Domain.Courses">
+    select *
+    from courses
+    where PrimaryCourse = '前端开发'
+  </select>
+  <select id="getBackEndCourseList" resultType="com.example.knowledgeSystem.Domain.Courses">
+    select *
+    from courses
+    where PrimaryCourse = '服务端相关'
+  </select>
+  <select id="getJavaCourseList" resultType="com.example.knowledgeSystem.Domain.Courses">
+    select *
+    from courses
+    where PrimaryCourse = 'Java'
+  </select>
+  <select id="getPythonCourseList" resultType="com.example.knowledgeSystem.Domain.Courses">
+    select *
+    from courses
+    where PrimaryCourse = 'Python'
+  </select>
+  <select id="getDatabaseCourseList" resultType="com.example.knowledgeSystem.Domain.Courses">
+    select *
+    from courses
+    where PrimaryCourse = '数据库'
+  </select>
+  <select id="countFrontEndCourseList" resultType="java.lang.Integer">
+    select count(*)
+    from courses
+    where PrimaryCourse = '前端开发'
+  </select>
+  <select id="countBackEndCourseList" resultType="java.lang.Integer">
+    select count(*)
+    from courses
+    where PrimaryCourse = '服务端相关'
+
+  </select>
+  <select id="countJavaCourseList" resultType="java.lang.Integer">
+    select count(*)
+    from courses
+    where PrimaryCourse = 'Java'
+  </select>
+  <select id="countPythonCourseList" resultType="java.lang.Integer">
+    select count(*)
+    from courses
+    where PrimaryCourse = 'Python'
+  </select>
+  <select id="countDatabaseCourseList" resultType="java.lang.Integer">
+    select count(*)
+    from courses
+    where PrimaryCourse = '数据库'
+  </select>
+    <select id="getAboutFrontEndCourseList" resultType="com.example.knowledgeSystem.Domain.Courses">
+    select *
+    from courses
+    where primarycourse = '前端开发'
+    </select>
+  <select id="getAboutBackEndCourseList" resultType="com.example.knowledgeSystem.Domain.Courses">
+    select *
+    from courses
+    where primarycourse = '服务端相关'
+  </select>
+    <select id="getAboutJavaCourseList" resultType="com.example.knowledgeSystem.Domain.Courses">
+        select *
+        from courses
+        where primarycourse = 'Java'
+    </select>
+    <select id="getAboutPythonCourseList" resultType="com.example.knowledgeSystem.Domain.Courses">
+        select *
+        from courses
+        where primarycourse = 'Python'
+    </select>
+    <select id="getAboutDatabaseCourseList" resultType="com.example.knowledgeSystem.Domain.Courses">
+        select *
+        from courses
+        where primarycourse = '数据库'
+    </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update courses
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.primarycourse != null">
+        PrimaryCourse = #{record.primarycourse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentcourse != null">
+        ParentCourse = #{record.parentcourse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subcourse != null">
+        SubCourse = #{record.subcourse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numberofcourses != null">
+        NumberOfCourses = #{record.numberofcourses,jdbcType=INTEGER},
+      </if>
+      <if test="record.numberoflearners != null">
+        NumberOfLearners = #{record.numberoflearners,jdbcType=INTEGER},
+      </if>
+      <if test="record.numberoffavorites != null">
+        NumberOfFavorites = #{record.numberoffavorites,jdbcType=INTEGER},
+      </if>
+      <if test="record.imageurl != null">
+        ImageUrl = #{record.imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coursedescription != null">
+        CourseDescription = #{record.coursedescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update courses
+    set id = #{record.id,jdbcType=INTEGER},
+      PrimaryCourse = #{record.primarycourse,jdbcType=VARCHAR},
+      ParentCourse = #{record.parentcourse,jdbcType=VARCHAR},
+      SubCourse = #{record.subcourse,jdbcType=VARCHAR},
+      NumberOfCourses = #{record.numberofcourses,jdbcType=INTEGER},
+      NumberOfLearners = #{record.numberoflearners,jdbcType=INTEGER},
+      NumberOfFavorites = #{record.numberoffavorites,jdbcType=INTEGER},
+      ImageUrl = #{record.imageurl,jdbcType=VARCHAR},
+      CourseDescription = #{record.coursedescription,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update courses
+    set id = #{record.id,jdbcType=INTEGER},
+      PrimaryCourse = #{record.primarycourse,jdbcType=VARCHAR},
+      ParentCourse = #{record.parentcourse,jdbcType=VARCHAR},
+      SubCourse = #{record.subcourse,jdbcType=VARCHAR},
+      NumberOfCourses = #{record.numberofcourses,jdbcType=INTEGER},
+      NumberOfLearners = #{record.numberoflearners,jdbcType=INTEGER},
+      NumberOfFavorites = #{record.numberoffavorites,jdbcType=INTEGER},
+      ImageUrl = #{record.imageurl,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.knowledgeSystem.Domain.Courses">
+    update courses
+    <set>
+      <if test="primarycourse != null">
+        PrimaryCourse = #{primarycourse,jdbcType=VARCHAR},
+      </if>
+      <if test="parentcourse != null">
+        ParentCourse = #{parentcourse,jdbcType=VARCHAR},
+      </if>
+      <if test="subcourse != null">
+        SubCourse = #{subcourse,jdbcType=VARCHAR},
+      </if>
+      <if test="numberofcourses != null">
+        NumberOfCourses = #{numberofcourses,jdbcType=INTEGER},
+      </if>
+      <if test="numberoflearners != null">
+        NumberOfLearners = #{numberoflearners,jdbcType=INTEGER},
+      </if>
+      <if test="numberoffavorites != null">
+        NumberOfFavorites = #{numberoffavorites,jdbcType=INTEGER},
+      </if>
+      <if test="imageurl != null">
+        ImageUrl = #{imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="coursedescription != null">
+        CourseDescription = #{coursedescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.knowledgeSystem.Domain.Courses">
+    update courses
+    set PrimaryCourse = #{primarycourse,jdbcType=VARCHAR},
+      ParentCourse = #{parentcourse,jdbcType=VARCHAR},
+      SubCourse = #{subcourse,jdbcType=VARCHAR},
+      NumberOfCourses = #{numberofcourses,jdbcType=INTEGER},
+      NumberOfLearners = #{numberoflearners,jdbcType=INTEGER},
+      NumberOfFavorites = #{numberoffavorites,jdbcType=INTEGER},
+      ImageUrl = #{imageurl,jdbcType=VARCHAR},
+      CourseDescription = #{coursedescription,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.knowledgeSystem.Domain.Courses">
+    update courses
+    set PrimaryCourse = #{primarycourse,jdbcType=VARCHAR},
+      ParentCourse = #{parentcourse,jdbcType=VARCHAR},
+      SubCourse = #{subcourse,jdbcType=VARCHAR},
+      NumberOfCourses = #{numberofcourses,jdbcType=INTEGER},
+      NumberOfLearners = #{numberoflearners,jdbcType=INTEGER},
+      NumberOfFavorites = #{numberoffavorites,jdbcType=INTEGER},
+      ImageUrl = #{imageurl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
