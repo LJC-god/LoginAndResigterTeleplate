@@ -4,8 +4,11 @@ echo Running Git commands...
 REM 添加所有修改
 git add .
 
+REM 提示用户输入提交注释
+set /p commit_message="请输入提交注释: "
+
 REM 提交更改
-git commit -m "test"
+git commit -m "%commit_message%"
 
 REM 推送到 GitHub 上的 master 分支
 git push -u github master
