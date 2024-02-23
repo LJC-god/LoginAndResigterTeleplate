@@ -5,7 +5,7 @@ REM 添加所有修改
 git add .
 
 REM 提示用户输入提交注释
-set /p commit_message="请输入提交注释: "
+set /p commit_message="push your annotation now "
 
 REM 提交更改
 git commit -m "%commit_message%"
