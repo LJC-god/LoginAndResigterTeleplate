@@ -36,7 +36,6 @@ export function getsqllist() {
     url: "/course/database",
   });
 }
-
 export function getAllfathertitle() {
   return hyRequest.get({
     url: "/course/about",
