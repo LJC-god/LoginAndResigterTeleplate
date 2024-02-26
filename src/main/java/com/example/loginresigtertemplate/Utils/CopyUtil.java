@@ -1,4 +1,4 @@
-package com.example.knowledgeSystem.Utils;
+package com.example.loginresigtertemplate.Utils;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;

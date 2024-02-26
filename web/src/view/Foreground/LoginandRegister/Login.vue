@@ -59,19 +59,21 @@
 </template>
   
   <script setup>
+import router from "@/router";
 import { ref, onMounted } from "vue";
 onMounted(() => {
   // 页面加载完成时，将焦点设置到用户输入框上
   document.getElementById("userInput").focus();
 });
-const useruser = ref("");
-const userPassword = ref("");
+const user = ref("");
+const password = ref("");
 const showSuccessModal = ref(false);
 
 const login = () => {
   console.log("Logging in...");
   // 模拟登录成功后显示弹窗
   showSuccessModal.value = true;
+  router.push("home")
 };
 
 const onFocus = (event) => {
