@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.loginresigtertemplate.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.example.loginresigtertemplate.domain.Role">
+    <id column="card_id" jdbcType="INTEGER" property="cardId" />
+    <result column="front_content" jdbcType="VARCHAR" property="frontContent" />
+    <result column="back_content" jdbcType="VARCHAR" property="backContent" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="profession" jdbcType="VARCHAR" property="profession" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    card_id, front_content, back_content, user_id, profession, created_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from card
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from card
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.loginresigtertemplate.domain.Role">
+    insert into card (card_id, front_content, back_content, 
+      user_id, profession, created_at
+      )
+    values (#{cardId,jdbcType=INTEGER}, #{frontContent,jdbcType=VARCHAR}, #{backContent,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{profession,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.loginresigtertemplate.domain.Role">
+    insert into card
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        card_id,
+      </if>
+      <if test="frontContent != null">
+        front_content,
+      </if>
+      <if test="backContent != null">
+        back_content,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="profession != null">
+        profession,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        #{cardId,jdbcType=INTEGER},
+      </if>
+      <if test="frontContent != null">
+        #{frontContent,jdbcType=VARCHAR},
+      </if>
+      <if test="backContent != null">
+        #{backContent,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="profession != null">
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.loginresigtertemplate.domain.Role">
+    update card
+    <set>
+      <if test="frontContent != null">
+        front_content = #{frontContent,jdbcType=VARCHAR},
+      </if>
+      <if test="backContent != null">
+        back_content = #{backContent,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="profession != null">
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.loginresigtertemplate.domain.Role">
+    update card
+    set front_content = #{frontContent,jdbcType=VARCHAR},
+      back_content = #{backContent,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      profession = #{profession,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </update>
+</mapper>

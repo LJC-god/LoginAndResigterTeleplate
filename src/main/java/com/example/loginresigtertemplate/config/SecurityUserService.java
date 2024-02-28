@@ -5,8 +5,7 @@ package com.example.loginresigtertemplate.config;
  *
  */
 
-import com.example.loginresigtertemplate.daomain.SecurityUser;
-import com.example.loginresigtertemplate.daomain.User;
+import com.example.loginresigtertemplate.domain.SecurityUser;
 import com.example.loginresigtertemplate.service.Impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountExpiredException;

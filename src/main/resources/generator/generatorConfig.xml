@@ -28,7 +28,7 @@
         </javaTypeResolver>
 
         <!--生成entity类存放位置-->
-        <javaModelGenerator targetPackage="com.example.loginresigtertemplate.daomain" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.example.loginresigtertemplate.domain" targetProject="src/main/java">
             <!--...-->
             <property name="enableSubPackages" value="true"/>
             <!--从数据库返回的值清理前后的空格-->

@@ -1,4 +1,4 @@
-package com.example.loginresigtertemplate.daomain;/*
+package com.example.loginresigtertemplate.domain;/*
  *@author LJCheng
  *@version 1.0
  *

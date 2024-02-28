@@ -18,7 +18,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.DefaultSecurityFilterChain;
+
 import javax.sql.DataSource;
+
 import jakarta.servlet.Filter;
 
 import java.util.HashMap;
@@ -28,6 +30,7 @@ import java.util.Map;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    // 配置数据源
     @Bean
     public DataSource dataSource() {
         return DataSourceBuilder.create()
@@ -38,9 +41,11 @@ public class SecurityConfig {
                 .build();
     }
 
+    // 配置TokenManager
     @Autowired
     private TokenManager tokenManager;
 
+    // 配置SecurityUserService
     @Autowired
     private SecurityUserService userService;
 
@@ -72,15 +77,17 @@ public class SecurityConfig {
                 .addFilter((Filter) new TokenAuthFilter(http.getSharedObject(AuthenticationManager.class), tokenManager))
                 // 启用HTTP基本认证
                 .httpBasic();
-
         return http.build();
     }
 
     // 提供密码编码器的Bean
     @Bean
-    public  static PasswordEncoder passwordEncoder() {
+    public static PasswordEncoder passwordEncoder() {
+        // 使用DelegatingPasswordEncoder代替原有的PasswordEncoder
         String encodingId = "bcrypt";
+        // 创建一个PasswordEncoder的Map，用于存放各种PasswordEncoder
         Map<String, PasswordEncoder> encoders = new HashMap<>();
+        // 将各种PasswordEncoder放入Map中
         encoders.put(encodingId, new BCryptPasswordEncoder());
         encoders.put("ldap", new org.springframework.security.crypto.password.LdapShaPasswordEncoder());
         encoders.put("MD4", new org.springframework.security.crypto.password.Md4PasswordEncoder());
@@ -92,6 +99,7 @@ public class SecurityConfig {
         return new DelegatingPasswordEncoder(encodingId, encoders);
     }
 
+    // 提供SqlSessionFactoryBean的Bean
     @Bean
     public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();

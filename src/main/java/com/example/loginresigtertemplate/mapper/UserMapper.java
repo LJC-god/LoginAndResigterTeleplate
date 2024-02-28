@@ -1,15 +1,15 @@
 package com.example.loginresigtertemplate.mapper;
 
-import com.example.loginresigtertemplate.daomain.User;
+import com.example.loginresigtertemplate.domain.User;
 
-public interface UserDao {
-    int deleteByPrimaryKey(Integer adminId);
+public interface UserMapper {
+    int deleteByPrimaryKey(Integer cardId);
 
     int insert(User record);
 
     int insertSelective(User record);
 
-    User selectByPrimaryKey(Integer adminId);
+    User selectByPrimaryKey(Integer cardId);
 
     int updateByPrimaryKeySelective(User record);
 

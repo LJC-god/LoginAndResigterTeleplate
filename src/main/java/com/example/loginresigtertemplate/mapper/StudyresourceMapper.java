@@ -1,15 +1,15 @@
 package com.example.loginresigtertemplate.mapper;
 
-import com.example.loginresigtertemplate.daomain.Studyresource;
+import com.example.loginresigtertemplate.domain.Studyresource;
 
-public interface StudyresourceDao {
-    int deleteByPrimaryKey(Integer adminId);
+public interface StudyresourceMapper {
+    int deleteByPrimaryKey(Integer cardId);
 
     int insert(Studyresource record);
 
     int insertSelective(Studyresource record);
 
-    Studyresource selectByPrimaryKey(Integer adminId);
+    Studyresource selectByPrimaryKey(Integer cardId);
 
     int updateByPrimaryKeySelective(Studyresource record);
 

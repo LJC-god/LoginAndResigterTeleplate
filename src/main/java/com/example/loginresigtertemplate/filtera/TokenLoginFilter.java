@@ -1,6 +1,5 @@
 package com.example.loginresigtertemplate.filtera;
-import com.example.loginresigtertemplate.daomain.SecurityUser;
-import com.example.loginresigtertemplate.daomain.User;
+import com.example.loginresigtertemplate.domain.SecurityUser;
 import com.example.loginresigtertemplate.security.TokenManager;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
