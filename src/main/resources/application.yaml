@@ -1,2 +1,27 @@
-#server:
-#  port: 8882
+server:
+  port: 8880
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://gz-cdb-ipst7wg5.sql.tencentcdb.com:63410/wiki?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: wiki
+    password: 6381186.
+    maximum-pool-size: 30
+    hikari:
+      max-lifetime: 120000
+
+#mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  type-aliases-package: com.hnumi.quick.entry
+  #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+  global-config:
+    id-type: 0
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper 调试神器
+    refresh-mapper: true
+  #输出sql日志
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
